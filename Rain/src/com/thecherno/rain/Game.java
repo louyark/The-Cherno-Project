@@ -1,8 +1,11 @@
 package com.thecherno.rain;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable {
@@ -76,6 +79,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public void render()
 	{
+		// The BufferStrategy class represents the mechanism with which to organize complex memory on a particular Canvas or Window.
 		// retrieving the bufferstrategy of canvas since our game class is a sub class of canvas 
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null)
@@ -83,6 +87,23 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
+		
+		// The Graphics class is the abstract base class for all graphics contexts that allow an application to draw onto components that are realized on various devices, as well as onto off-screen images.
+		// Crating a link between the bufferstrategy and the graphic object.
+		Graphics g = bs.getDrawGraphics();
+		
+		// choosing color
+		g.setColor(Color.BLACK);
+		
+		// setting the graphic surface the same as the canvas surface "getWidth() and getHeight()are 2 inherited methods from canvas class.
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		// this method is called to empty the buffer strategy from data 
+		g.dispose();
+		
+		// this method is called to make the next buffer visible
+		bs.show();
+		
 	}
 	
 	public static void main(String[] args)
