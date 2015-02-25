@@ -10,6 +10,8 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.thecherno.rain.graphics.Screen;
+
 public class Game extends Canvas implements Runnable {
 
 	// this attribute is to verify the integrity of the class when it's
@@ -29,6 +31,8 @@ public class Game extends Canvas implements Runnable {
 
 	// Running game variable
 	private boolean runnig = false;
+	
+	private Screen screen;
 
 	// we create by this code line an image which we are going tu modify and
 	// render to the screen each time
@@ -45,6 +49,7 @@ public class Game extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		// this method is inherited from Canvas class it defines it's dimension
 		setPreferredSize(size);
+		screen= new Screen(width, height);
 		frame = new JFrame();
 	}
 
