@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable {
 
 	// Running game variable
 	private boolean runnig = false;
-	
+
 	private Screen screen;
 
 	// we create by this code line an image which we are going tu modify and
@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		// this method is inherited from Canvas class it defines it's dimension
 		setPreferredSize(size);
-		screen= new Screen(width, height);
+		screen = new Screen(width, height);
 		frame = new JFrame();
 	}
 
@@ -96,17 +96,24 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void render() {
-		
+
 		// The BufferStrategy class represents the mechanism with which to
 		// organize complex memory on a particular Canvas or Window.
 		// retrieving the bufferstrategy of canvas since our game class is a sub
 		// class of canvas
-		
+
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
 			return;
 		}
+
+		screen.render();
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = screen.pixels[i];
+		}
+		
+		
 
 		// The Graphics class is the abstract base class for all graphics
 		// contexts that allow an application to draw onto components that are
@@ -115,12 +122,14 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 
 		// choosing color
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
 
 		// setting the graphic surface the same as the canvas surface
 		// "getWidth() and getHeight()are 2 inherited methods from canvas class.
-		g.fillRect(0, 0, getWidth(), getHeight());
+		//g.fillRect(0, 0, getWidth(), getHeight());
 
+		g.drawImage(image, 0, 0, getWidth(), getHeight(),null);
+		
 		// this method is called to empty the buffer strategy from data
 		g.dispose();
 
